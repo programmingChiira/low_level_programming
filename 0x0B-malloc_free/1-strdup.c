@@ -1,26 +1,34 @@
 #include "main.h"
-#include <stdio.h>
+#include <stdlib.h>
 
 /**
- * main - Prints the number of arguments passed into main
- * @argc: Number of command line arguments
- * @argv: Array name
- * Return: 0
+ * _strdup - Returns a pointer to a newly-allocated space in memory
+ *           containing a copy of the string given as parameter.
+ * @str: The string to be copied.
+ *
+ * Return: If str == NULL or insufficient memory is available - NULL.
+ *         Otherwise - a pointer to the duplicated string.
  */
-
-int main(int argc, char *argv[])
+char *_strdup(char *str)
 {
-	int i;
+	char *duplicate;
+	int index, len = 0;
 
-	if (argc == 1)
-		printf("%d\n", argc - 1);
-	else
-	{
-		for (i = 0; *argv; i++, argv++)
-			;
+	if (str == NULL)
+		return (NULL);
 
-		printf("%d\n", i - 1);
-	}
+	for (index = 0; str[index]; index++)
+		len++;
 
-	return (0);
+	duplicate = malloc(sizeof(char) * (len + 1));
+
+	if (duplicate == NULL)
+		return (NULL);
+
+	for (index = 0; str[index]; index++)
+		duplicate[index] = str[index];
+
+	duplicate[len] = '\0';
+
+	return (duplicate);
 }
